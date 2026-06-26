@@ -80,6 +80,14 @@ body::before {
   text-align: center;
 }
 
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(192, 118, 78, 0.10) 0%, transparent 55%);
+  pointer-events: none;
+}
+
 .headline {
   font-weight: 300;
   font-size: clamp(26px, 4vw, 42px);
