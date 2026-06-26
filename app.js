@@ -6,9 +6,10 @@ const inShell = typeof window.inovar !== "undefined";
 
 async function attemptHandshake() {
   if (!inShell) {
-    statusText.textContent = "acesso direto · modo público";
-    channelReadout.textContent = "canal: web · pública";
-    actionLink.textContent = "→ entrar no motor";
+    statusText.textContent = "acesso restrito · terminal não reconhecido";
+    channelReadout.textContent = "canal: bloqueado";
+    actionLink.style.display = "none";
+    document.querySelector(".ping").style.borderColor = "#ff3b30";
     return;
   }
 
@@ -21,19 +22,20 @@ async function attemptHandshake() {
     if (ok) {
       statusText.textContent = "canal interno · sintonia confirmada";
       channelReadout.textContent = "ponte interna · segura";
+      document.body.classList.add("authenticated");
       sessionStorage.setItem("inovar_authenticated", "true");
       setTimeout(() => {
         window.location.href = "welcome.html";
       }, 1400);
     } else {
-      statusText.textContent = "sem sintonia · modo público";
-      channelReadout.textContent = "canal: web · pública";
-      actionLink.textContent = "→ entrar no motor";
+      statusText.textContent = "acesso restrito · autenticação recusada";
+      channelReadout.textContent = "canal: bloqueado";
+      actionLink.style.display = "none";
     }
   } catch (err) {
-    statusText.textContent = "sem sintonia · modo público";
-    channelReadout.textContent = "canal: web · pública";
-    actionLink.textContent = "→ entrar no motor";
+    statusText.textContent = "acesso restrito · erro de ligação";
+    channelReadout.textContent = "canal: bloqueado";
+    actionLink.style.display = "none";
   }
 }
 

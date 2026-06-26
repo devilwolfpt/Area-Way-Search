@@ -18,10 +18,10 @@
       <span class="dot live" id="statusDot"></span>
       Inovar
     </div>
-    <div class="status-readout">modo livre · pesquisa direta</div>
+    <div class="status-readout">canal interno · seguro</div>
   </header>
 
-  <main class="stage">
+  <main class="stage" id="searchStage">
 
     <div class="sonar" aria-hidden="true">
       <svg viewBox="0 0 400 400">
@@ -55,38 +55,57 @@
   </main>
 
   <footer class="footbar">
-    <span class="mono" id="channelReadout">canal: web · público</span>
+    <span class="mono" id="channelReadout">canal: interno · seguro</span>
     <span class="mono">Inovar · 2026</span>
   </footer>
 
   <script>
-    const inShell = typeof window.inovar !== "undefined";
-    const searchForm = document.getElementById("searchForm");
-    const searchInput = document.getElementById("searchInput");
-    const suggestions = document.getElementById("suggestions");
+    var authed = sessionStorage.getItem("inovar_authenticated") === "true";
+    var inShell = typeof window.inovar !== "undefined";
 
-    function runSearch(query) {
-      var q = query.trim();
-      if (!q) return;
-
-      if (inShell) {
-        window.inovar.search(q);
-      } else {
-        window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(q);
+    if (authed || inShell) {
+      if (!authed && inShell) {
+        (async function() {
+          try {
+            var ok = await window.inovar.authenticate();
+            if (ok) {
+              sessionStorage.setItem("inovar_authenticated", "true");
+              return;
+            }
+          } catch(e) {}
+          window.location.href = "index.html";
+        })();
       }
+
+      var searchForm = document.getElementById("searchForm");
+      var searchInput = document.getElementById("searchInput");
+      var suggestions = document.getElementById("suggestions");
+
+      function runSearch(query) {
+        var q = query.trim();
+        if (!q) return;
+        window.inovar.search(q);
+      }
+
+      searchForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        runSearch(searchInput.value);
+      });
+
+      suggestions.addEventListener("click", function(e) {
+        var btn = e.target.closest(".freq");
+        if (!btn) return;
+        searchInput.value = btn.dataset.q;
+        runSearch(btn.dataset.q);
+      });
+    } else {
+      document.getElementById("searchStage").innerHTML =
+        '<div style="text-align:center;padding:80px 24px">' +
+        '<h1 style="font-size:42px;margin:0 0 12px;font-family:var(--display)">' + String.fromCharCode(9201) + '</h1>' +
+        '<p style="color:var(--muted);font-size:15px;line-height:1.6">' +
+        'Acesso restrito.<br>Esta página só está disponível através do browser Inovar.' +
+        '</p></div>';
     }
-
-    searchForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      runSearch(searchInput.value);
-    });
-
-    suggestions.addEventListener("click", function(e) {
-      var btn = e.target.closest(".freq");
-      if (!btn) return;
-      searchInput.value = btn.dataset.q;
-      runSearch(btn.dataset.q);
-    });
   </script>
 </body>
 </html>
