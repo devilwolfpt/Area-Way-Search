@@ -28,15 +28,11 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 50% 20%, rgba(192, 118, 78, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(192, 118, 78, 0.06) 0%, transparent 40%);
+    radial-gradient(ellipse at 50% 30%, rgba(192, 118, 78, 0.12) 0%, rgba(232, 205, 184, 0.06) 40%, transparent 60%);
   pointer-events: none;
-  z-index: 0;
 }
 
 .topbar {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -73,8 +69,6 @@ body::before {
 }
 
 .stage {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,18 +76,6 @@ body::before {
   min-height: 78vh;
   padding: 40px 24px;
   text-align: center;
-}
-
-.stage::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 700px;
-  height: 500px;
-  transform: translate(-50%, -55%);
-  background: radial-gradient(ellipse, rgba(192, 118, 78, 0.18) 0%, rgba(232, 205, 184, 0.10) 40%, transparent 65%);
-  pointer-events: none;
 }
 
 .headline {
@@ -206,8 +188,6 @@ body::before {
 }
 
 .footbar {
-  position: relative;
-  z-index: 1;
   display: flex;
   justify-content: space-between;
   padding: 0 36px 28px;
