@@ -1,14 +1,15 @@
 :root {
-  --bg-start: #fdf8f4;
-  --bg-end: #f0e3d8;
+  --bg-start: #fffaf5;
+  --bg-mid: #f5e8dc;
+  --bg-end: #ebd7c5;
   --fg: #3d2b1f;
   --muted: #a08978;
   --accent: #c0764e;
   --accent-light: #e8cdb8;
   --border: #e5d8cc;
-  --glass: rgba(255, 255, 255, 0.5);
-  --glass-border: rgba(255, 255, 255, 0.8);
-  --shadow: rgba(160, 137, 120, 0.08);
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --shadow: rgba(160, 137, 120, 0.10);
 }
 
 * { box-sizing: border-box; }
@@ -16,7 +17,7 @@
 html, body {
   margin: 0;
   min-height: 100%;
-  background: linear-gradient(160deg, var(--bg-start), var(--bg-end));
+  background: linear-gradient(170deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
   color: var(--fg);
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,7 +27,9 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 30%, rgba(192, 118, 78, 0.08) 0%, transparent 60%);
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(192, 118, 78, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(192, 118, 78, 0.06) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
 }
@@ -37,23 +40,24 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 32px 0;
+  padding: 28px 36px 0;
 }
 
 .wordmark {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--fg);
 }
 
 .dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--accent);
-  opacity: 0.4;
+  opacity: 0.5;
   transition: opacity 0.3s;
 }
 
@@ -64,7 +68,7 @@ body::before {
 .status-readout {
   font-size: 11px;
   color: var(--muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -75,7 +79,7 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80vh;
+  min-height: 78vh;
   padding: 40px 24px;
   text-align: center;
 }
@@ -83,20 +87,26 @@ body::before {
 .stage::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 40%, rgba(192, 118, 78, 0.10) 0%, transparent 55%);
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: 500px;
+  transform: translate(-50%, -55%);
+  background: radial-gradient(ellipse, rgba(192, 118, 78, 0.18) 0%, rgba(232, 205, 184, 0.10) 40%, transparent 65%);
   pointer-events: none;
 }
 
 .headline {
+  position: relative;
   font-weight: 300;
-  font-size: clamp(26px, 4vw, 42px);
-  margin: 0 0 40px;
+  font-size: clamp(28px, 4.5vw, 44px);
+  margin: 0 0 36px;
   letter-spacing: -0.02em;
   color: var(--muted);
 }
 
 .search-shell {
+  position: relative;
   width: min(480px, 90vw);
   display: flex;
   align-items: center;
@@ -105,15 +115,15 @@ body::before {
   border-radius: 16px;
   background: var(--glass);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 24px var(--shadow);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px var(--shadow), 0 1px 4px rgba(255, 255, 255, 0.5) inset;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 
 .search-shell:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 4px 32px rgba(192, 118, 78, 0.12);
+  box-shadow: 0 4px 32px rgba(192, 118, 78, 0.15), 0 1px 4px rgba(255, 255, 255, 0.5) inset;
 }
 
 .search-icon {
@@ -168,6 +178,7 @@ body::before {
 }
 
 .suggestions {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -199,7 +210,7 @@ body::before {
   z-index: 1;
   display: flex;
   justify-content: space-between;
-  padding: 0 32px 24px;
+  padding: 0 36px 28px;
 }
 
 .mono {
@@ -213,5 +224,10 @@ body::before {
   .topbar, .footbar {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .stage::before {
+    width: 90vw;
+    height: 300px;
   }
 }

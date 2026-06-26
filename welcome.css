@@ -1,12 +1,13 @@
 :root {
-  --bg-start: #fdf8f4;
-  --bg-end: #f0e3d8;
+  --bg-start: #fffaf5;
+  --bg-mid: #f5e8dc;
+  --bg-end: #ebd7c5;
   --fg: #3d2b1f;
   --muted: #a08978;
   --accent: #c0764e;
   --accent-light: #e8cdb8;
   --glass: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.85);
 }
 
 * { box-sizing: border-box; }
@@ -14,13 +15,25 @@
 html, body {
   margin: 0;
   min-height: 100%;
-  background: linear-gradient(160deg, var(--bg-start), var(--bg-end));
+  background: linear-gradient(170deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
   color: var(--fg);
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(192, 118, 78, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(192, 118, 78, 0.06) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .welcome-stage {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,30 +41,34 @@ html, body {
   justify-content: center;
   text-align: center;
   padding: 40px 24px;
-  position: relative;
+  z-index: 1;
 }
 
 .welcome-stage::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 30%, rgba(192, 118, 78, 0.08) 0%, transparent 60%);
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 450px;
+  transform: translate(-50%, -55%);
+  background: radial-gradient(ellipse, rgba(192, 118, 78, 0.18) 0%, rgba(232, 205, 184, 0.10) 40%, transparent 65%);
   pointer-events: none;
 }
 
 h1 {
+  position: relative;
   font-weight: 300;
   font-size: clamp(28px, 4.5vw, 44px);
   margin: 0 0 10px;
   letter-spacing: -0.02em;
-  position: relative;
 }
 
 .lede, .eyebrow {
+  position: relative;
   margin: 0 0 8px;
   font-size: 14px;
   color: var(--muted);
-  position: relative;
 }
 
 .eyebrow {
@@ -63,6 +80,7 @@ h1 {
 }
 
 .back {
+  position: relative;
   font-size: 13px;
   color: var(--accent);
   text-decoration: none;
@@ -74,10 +92,16 @@ h1 {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: background 0.25s, transform 0.2s;
-  position: relative;
 }
 
 .back:hover {
   background: var(--accent-light);
   transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+  .welcome-stage::before {
+    width: 90vw;
+    height: 300px;
+  }
 }
