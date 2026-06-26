@@ -2,16 +2,14 @@ var root = document.getElementById("welcomeRoot");
 var statusText = document.getElementById("statusText");
 var channelReadout = document.getElementById("channelReadout");
 var actionLink = document.getElementById("actionLink");
-var ping = document.getElementById("pingEl");
 var inShell = typeof window.inovar !== "undefined";
 
 async function attemptHandshake() {
   if (!inShell) {
     root.classList.remove("hidden");
-    statusText.textContent = "acesso restrito · terminal não reconhecido";
-    channelReadout.textContent = "canal: bloqueado";
+    statusText.textContent = "acesso restrito";
+    channelReadout.textContent = "terminal não reconhecido";
     actionLink.style.display = "none";
-    ping.style.borderColor = "#ff3b30";
     return;
   }
 
@@ -29,7 +27,6 @@ async function attemptHandshake() {
   statusText.textContent = "acesso restrito";
   channelReadout.textContent = "canal: bloqueado";
   actionLink.style.display = "none";
-  ping.style.borderColor = "#ff3b30";
 }
 
 attemptHandshake();
