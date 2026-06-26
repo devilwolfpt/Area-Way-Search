@@ -7,63 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="welcome.css" />
 </head>
 <body>
-
-  <div class="noise"></div>
-
-  <header class="topbar">
-    <div class="wordmark">
-      <span class="dot" id="statusDot"></span>
-      Inovar
-    </div>
-    <div class="status-readout" id="statusText">a estabelecer sintonia&hellip;</div>
-  </header>
-
-  <main class="stage">
-
-    <div class="sonar" aria-hidden="true">
-      <svg viewBox="0 0 400 400">
-        <circle class="ring ring-1" cx="200" cy="200" r="60" />
-        <circle class="ring ring-2" cx="200" cy="200" r="110" />
-        <circle class="ring ring-3" cx="200" cy="200" r="160" />
-        <line class="sweep" x1="200" y1="200" x2="200" y2="20" />
-      </svg>
-    </div>
-
-    <h1 class="headline">Diz o que procuras.<br><span>Nós sintonizamos.</span></h1>
-
-    <form class="search-shell" id="searchForm" autocomplete="off">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.6"/>
-        <line x1="15.4" y1="15.4" x2="21" y2="21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-      <input
-        id="searchInput"
-        type="text"
-        placeholder="Pesquisar na rede com o Inovar…"
-        aria-label="Pesquisar"
-      />
-      <button type="submit" class="go" aria-label="Pesquisar">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </form>
-
-    <div class="frequencies" id="suggestions">
-      <button class="freq" data-q="previsão do tempo">previsão do tempo</button>
-      <button class="freq" data-q="cotação do euro">cotação do euro</button>
-      <button class="freq" data-q="notícias de hoje">notícias de hoje</button>
-      <button class="freq" data-q="receitas rápidas">receitas rápidas</button>
-    </div>
-
+  <main class="welcome-stage">
+    <div class="ping" aria-hidden="true"></div>
+    <p class="mono eyebrow" id="statusText">a estabelecer sintonia…</p>
+    <h1>Bem-vindo ao Inovar.</h1>
+    <p class="lede" id="channelReadout">canal: ponte interna</p>
+    <a class="back" id="actionLink" href="welcome.html">&larr; entrar no motor</a>
   </main>
-
-  <footer class="footbar">
-    <span class="mono" id="channelReadout">canal: web · à espera do motor</span>
-    <span class="mono">Inovar · 2026</span>
-  </footer>
-
   <script src="app.js"></script>
 </body>
 </html>
