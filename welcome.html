@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bem-vindo · Inovar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="welcome.css" />
+</head>
+<body>
+  <main class="welcome-stage">
+    <div class="ping" aria-hidden="true"></div>
+    <p class="mono eyebrow">canal interno · sintonia confirmada</p>
+    <h1>Bem-vindo ao Inovar.</h1>
+    <p class="lede">A ligação ao browser foi reconhecida. A partir daqui é tudo sintonizado contigo.</p>
+    <a class="back" href="index.html">&larr; voltar ao início</a>
+  </main>
+  <script>
+    // Se chegou aqui sem autenticação (ex: acesso direto num browser normal),
+    // mostra apenas a mensagem de boas-vindas pública — não há segredo na página.
+    if (sessionStorage.getItem("inovar_authenticated") !== "true") {
+      document.querySelector(".eyebrow").textContent = "acesso direto · modo público";
+    }
+  </script>
+</body>
+</html>
