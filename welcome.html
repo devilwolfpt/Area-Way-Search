@@ -18,8 +18,6 @@
     <a class="back" href="index.html">&larr; voltar ao início</a>
   </main>
   <script>
-    // Se chegou aqui sem autenticação (ex: acesso direto num browser normal),
-    // mostra apenas a mensagem de boas-vindas pública — não há segredo na página.
     if (sessionStorage.getItem("inovar_authenticated") !== "true") {
       document.querySelector(".eyebrow").textContent = "acesso direto · modo público";
     }
