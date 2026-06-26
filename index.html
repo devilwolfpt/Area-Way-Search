@@ -8,10 +8,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="welcome.css" />
+<style>
+  .hidden { display: none; }
+</style>
 </head>
 <body>
-  <main class="welcome-stage">
-    <div class="ping" aria-hidden="true"></div>
+  <main class="welcome-stage hidden" id="welcomeRoot">
+    <div class="ping" id="pingEl" aria-hidden="true"></div>
     <p class="mono eyebrow" id="statusText">a estabelecer sintonia…</p>
     <h1>Bem-vindo ao Inovar.</h1>
     <p class="lede" id="channelReadout">canal: ponte interna</p>

@@ -1,42 +1,35 @@
-const statusText = document.getElementById("statusText");
-const channelReadout = document.getElementById("channelReadout");
-const actionLink = document.getElementById("actionLink");
-
-const inShell = typeof window.inovar !== "undefined";
+var root = document.getElementById("welcomeRoot");
+var statusText = document.getElementById("statusText");
+var channelReadout = document.getElementById("channelReadout");
+var actionLink = document.getElementById("actionLink");
+var ping = document.getElementById("pingEl");
+var inShell = typeof window.inovar !== "undefined";
 
 async function attemptHandshake() {
   if (!inShell) {
+    root.classList.remove("hidden");
     statusText.textContent = "acesso restrito · terminal não reconhecido";
     channelReadout.textContent = "canal: bloqueado";
     actionLink.style.display = "none";
-    document.querySelector(".ping").style.borderColor = "#ff3b30";
+    ping.style.borderColor = "#ff3b30";
     return;
   }
 
-  statusText.textContent = "a estabelecer sintonia…";
-  channelReadout.textContent = "canal: ponte interna";
-
   try {
-    const ok = await window.inovar.authenticate();
+    var ok = await window.inovar.authenticate();
 
     if (ok) {
-      statusText.textContent = "canal interno · sintonia confirmada";
-      channelReadout.textContent = "ponte interna · segura";
-      document.body.classList.add("authenticated");
       sessionStorage.setItem("inovar_authenticated", "true");
-      setTimeout(() => {
-        window.location.href = "welcome.html";
-      }, 1400);
-    } else {
-      statusText.textContent = "acesso restrito · autenticação recusada";
-      channelReadout.textContent = "canal: bloqueado";
-      actionLink.style.display = "none";
+      window.location.href = "welcome.html";
+      return;
     }
-  } catch (err) {
-    statusText.textContent = "acesso restrito · erro de ligação";
-    channelReadout.textContent = "canal: bloqueado";
-    actionLink.style.display = "none";
-  }
+  } catch (err) {}
+
+  root.classList.remove("hidden");
+  statusText.textContent = "acesso restrito";
+  channelReadout.textContent = "canal: bloqueado";
+  actionLink.style.display = "none";
+  ping.style.borderColor = "#ff3b30";
 }
 
 attemptHandshake();
